@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Project Title</title>
+	<link media="all" rel="stylesheet" href="style.css">
+	<script>
+		function go() {
+			var start = document.getElementById('start');
+			var minutes = document.getElementById('minutes');
+			// var seconds = document.getElementById('seconds');
+			var stop = document.getElementById('stop');
+			window.timerId = window.setInterval(timer, 1000);
+			start.disabled = true;
+			stop.disabled = false;
+		}
+
+		function stop() {
+			window.clearInterval(window.timerId);
+			stop.disabled = true;
+			start.disabled = false;
+		}
+
+		function timer() {
+			var numMin = parseInt(minutes.value)-1;
+			minutes.value = numMin;
+
+			if (numMin == 0) {
+				stop();
+				var timerStop = document.getElementById('stop');
+				timerStop.innerHTML = 'Гречка сварилась!';
+				start.disabled = true;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="wrapper">
+		<div class="timer">
+			<input type="text" id="minutes">
+			<p id="stop"></p>
+			<input type="submit" class="btn" value="start" id="start" onclick="go()">
+			<input type="submit" class="btn" value="stop" id="stop" onclick="stop()">
+		</div>
+	</div>
+</body>
+</html>
